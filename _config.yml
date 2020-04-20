@@ -1,1 +1,11 @@
-
+future:      false  # publish future dated posts --  true, false (default) 
+highlighter: rouge
+markdown:    kramdown
+gems:
+plugins:
+  - jekyll-sitemap
+  - jekyll-paginate
+  - jekyll-gist
+remote_theme : mmistakes/minimal-mistakes
+url                      : "https://jihyun.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+baseurl                  : "" # the subpath of your site, e.g. "/blog"

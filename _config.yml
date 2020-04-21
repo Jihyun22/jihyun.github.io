@@ -16,7 +16,7 @@ minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt"
 
 # Site Settings
 locale                   : "korea"
-title                    : "지현테크ʕ•ﻌ•ʔ"
+title                    : "2시 2분"
 title_separator          : "ʕ•ﻌ•ʔ"
 name                     : "권지현"
 description              : "데이터분석과 ML전반에 대해 다룹니다."

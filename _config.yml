@@ -16,9 +16,9 @@ minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt"
 
 # Site Settings
 locale                   : "korea"
-title                    : "2시 2분"
+title                    : "바이지-데브로그"
 title_separator          : "ʕ•ﻌ•ʔ"
-name                     : "권지현"
+name                     : "지현"
 description              : "데이터분석과 ML전반에 대해 다룹니다."
 url                      : "https://Jihyun22.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"

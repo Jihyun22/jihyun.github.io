@@ -18,7 +18,7 @@ minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt"
 locale                   : "korea"
 title                    : "바이지-데브로그"
 title_separator          : "ʕ•ﻌ•ʔ"
-name                     : "지현"
+name                     : "지현ʕ•ﻌ•ʔ"
 description              : "데이터분석과 ML전반에 대해 다룹니다."
 url                      : "https://Jihyun22.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
@@ -92,9 +92,9 @@ analytics:
 
 # Site Author
 author:
-  name             : "지현"
+  name             : "지현ʕ•ﻌ•ʔ"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "데이터분석과 ML전반에 대해 다룹니다."
+  bio              : "데이터분석과 머신러닝에\n대해 다룹니다."
   location         : "서울, 대한민국"
   email            : "ydue892@gmail.com"
   links:

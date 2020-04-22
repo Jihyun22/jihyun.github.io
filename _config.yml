@@ -24,7 +24,7 @@ url                      : "https://Jihyun22.github.io" # the base hostname & pr
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
 teaser                   : "/assets/images/logo.png"
-logo                     : "/assets/images/logo2.png"
+logo                     : "/assets/images/logo.png"
 masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
 # breadcrumbs            : false # true, false (default)
 words_per_minute         : 200
@@ -96,7 +96,7 @@ author:
   name             : "지현"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "Data science and Machine-Learning"
-  location         : "서울, 대한민국"
+  location         : "Seoul. Korea"
   email            : "ydue892@gmail.com"
   links:
     - label: "Linkein"

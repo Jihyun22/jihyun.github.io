@@ -270,7 +270,7 @@ defaults:
       path: ""
       type: posts
     values:
-      layout: blog
+      layout: single
       author_profile: false
       read_time: true
       comments: true

@@ -3,6 +3,6 @@
 ---
 
 @charset "utf-8";
-
+@import url(https://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);//google web font added
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials

@@ -1,7 +1,5 @@
 # main links
 main:
- - title: "Home"
-    url: "https://jihyun22.github.io"
   - title: "Category"
     url: /categories/
   - title: "Tag"

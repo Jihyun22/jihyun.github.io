@@ -93,8 +93,7 @@ analytics:
 # Site Author
 author:
   name             : "지현"
-    - avatar       : "/assets/images/profile.gif"
-    - url          : "https://Jihyun22.github.io"
+  avatar           : "/assets/images/profile.gif"
   bio              : "Data science and Machine-Learning"
   url              : "https://Jihyun22.github.io"
   location         : "Seoul. Korea"

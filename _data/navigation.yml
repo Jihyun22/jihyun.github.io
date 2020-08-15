@@ -1,9 +1,11 @@
 # main links
 main:
-  - title: "Category"
+  - icon: "fas fa-fw fa-link"
     url: /categories/
-  - title: "tag"
+  - icon: "fas fa-fw fa-link"
     url: /tags/
+  - icon: "fas fa-fw fa-link"
+    url: /about/
   # - title: "Sample Posts"
   #   url: /year-archive/
   # - title: "Sample Collections"
@@ -12,7 +14,12 @@ main:
   #   url: /sitemap/
  
 docs:
-  - title: Data Contest
+  - title: "Home"
+    url : https://jihyun22.github.io
+    children:
+      - title: "about"
+        url: /tags/
+  - title: "Data Contest"
     children:
       - title: "Kaggle"
         url: https://jihyun22.github.io/categories/#kaggle
@@ -20,7 +27,7 @@ docs:
         url: https://jihyun22.github.io/categories/#dacon
       - title: "ect"
         url: https://jihyun22.github.io/categories/#ect
-  - title: Data Mining
+  - title: "Data Mining"
     children:
       - title: "examples"
         url: https://jihyun22.github.io/categories/#examples

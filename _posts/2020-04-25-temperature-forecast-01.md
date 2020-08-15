@@ -1,7 +1,7 @@
 ---
-title: "[데이콘 온도추정 대회] 1편-데이터셋 구조"
-date: 2020-04-27
-categories: 데이콘리뷰
+title: "[데이콘 온도추정 대회 리뷰] 1편-데이터셋 구조"
+date: 2020-03-14
+categories: Dacon ect
 toc: true
 toc_sticky: true
 toc_label: "목차"

@@ -19,10 +19,6 @@ docs:
     children:
       - title: "about"
         url: /about/
-      - title: "category"
-        url: /categories/
-      - title: "tags"
-        url: /tags/
   - title: "Data Contest"
     children:
       - title: "Kaggle"

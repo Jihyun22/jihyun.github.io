@@ -21,7 +21,7 @@ docs:
     url : https://jihyun22.github.io
     children:
       - title: "about"
-        url: /archive/
+        url: /about_me/
       - title: "category"
         url: /categories/
       - title: "tags"

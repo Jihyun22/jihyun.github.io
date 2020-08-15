@@ -1,12 +1,12 @@
 # main links
 main:
-  - title : "categories"
+  - title : " "
     icon: "fas fa-fw fa-link"
     url: /categories/
-  - title : "tags"
+  - title : "fas fa-fw fa-link"
     icon: "fas fa-fw fa-link"
     url: /tags/
-  - title : "years"
+  - title : " "
     icon: "fas fa-fw fa-link"
     url: /years/
   # - title: "Sample Posts"

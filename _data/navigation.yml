@@ -8,7 +8,7 @@ main:
     url: /tags/
   - title : "years"
     icon: "fas fa-fw fa-link"
-    url: /about/
+    url: /years/
   # - title: "Sample Posts"
   #   url: /year-archive/
   # - title: "Sample Collections"
@@ -21,7 +21,7 @@ docs:
     url : https://jihyun22.github.io
     children:
       - title: "about"
-        url: /about_me/
+        url: /about/
       - title: "category"
         url: /categories/
       - title: "tags"

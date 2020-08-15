@@ -1,7 +1,7 @@
 ---
 title: "[데이콘 온도추정 대회 리뷰] 2편-기본 아이디어"
 date: 2020-03-21
-categories: Dacon ect 데이콘리뷰
+categories: 데이콘리뷰
 toc: true
 toc_sticky: true
 toc_label: "목차"

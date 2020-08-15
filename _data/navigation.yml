@@ -18,7 +18,7 @@ docs:
     url : https://jihyun22.github.io
     children:
       - title: "about"
-        url: /tags/
+        url: /about/
   - title: "Data Contest"
     children:
       - title: "Kaggle"

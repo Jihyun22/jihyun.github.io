@@ -246,6 +246,9 @@ category_archive:
 tag_archive:
   type: liquid
   path: /tags/
+ years:
+  type: liquid
+  path: /years/
 about:
   type: liquid
   path: /about/

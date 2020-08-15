@@ -22,14 +22,14 @@ docs:
   - title: "Data Contest"
     children:
       - title: "Kaggle"
-        url: https://jihyun22.github.io/categories/#kaggle
+        url: https://jihyun22.github.io/tags/#kaggle
       - title: "Dacon"
-        url: https://jihyun22.github.io/categories/#데이콘리뷰
+        url: https://jihyun22.github.io/tags/#dacon
       - title: "ect"
-        url: https://jihyun22.github.io/categories/#ect
+        url: https://jihyun22.github.io/tags/#ect
   - title: "Data Mining"
     children:
       - title: "examples"
-        url: https://jihyun22.github.io/categories/#데이터분석
+        url: https://jihyun22.github.io/tags/#example
       - title: "Project"
-        url: https://jihyun22.github.io/categories/#project
+        url: https://jihyun22.github.io/tags/#project

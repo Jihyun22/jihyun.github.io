@@ -1,12 +1,12 @@
 # main links
 main:
-  - title : " "
+  - title : "categories"
     icon: "fas fa-fw fa-link"
     url: /categories/
-  - title : " "
+  - title : "tags"
     icon: "fas fa-fw fa-link"
     url: /tags/
-  - title : " "
+  - title : "years"
     icon: "fas fa-fw fa-link"
     url: /about/
   # - title: "Sample Posts"
@@ -20,10 +20,12 @@ docs:
   - title: "Home"
     url : https://jihyun22.github.io
     children:
-      - title: "category"
-        url: https://jihyun22.github.io/categories
       - title: "about"
         url: /archive/
+      - title: "category"
+        url: /categories/
+      - title: "tags"
+        url: /tags/
   - title: "Data Contest"
     children:
       - title: "Kaggle"

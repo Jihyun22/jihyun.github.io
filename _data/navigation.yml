@@ -24,12 +24,12 @@ docs:
       - title: "Kaggle"
         url: https://jihyun22.github.io/categories/#kaggle
       - title: "Dacon"
-        url: https://jihyun22.github.io/categories/#dacon
+        url: https://jihyun22.github.io/categories/#데이콘리뷰
       - title: "ect"
         url: https://jihyun22.github.io/categories/#ect
   - title: "Data Mining"
     children:
       - title: "examples"
-        url: https://jihyun22.github.io/categories/#examples
+        url: https://jihyun22.github.io/categories/#데이터분석
       - title: "Project"
         url: https://jihyun22.github.io/categories/#project

@@ -8,7 +8,7 @@ toc_label: "목차"
 tags : 온도추정대회 DACON ML 머신러닝
 ---
 
-![HitCount](https://jihyun22.github.io/dacon/ect/temperature-forecast-01.svg)
+![HitCount](http://jihyun22.github.io/dacon/ect/temperature-forecast-01.svg)
 
 
 데이콘에서 20년 3-4월 진행된 [AI프렌즈 시즌1 온도 추정 경진대회](https://dacon.io/competitions/official/235584/overview/)에 대해 리뷰하며, 대회에서 제공하는 데이터셋의 구조와 기본 아이디어에 대해 알아보겠습니다.

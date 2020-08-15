@@ -19,12 +19,14 @@ docs:
     children:
       - title: "about"
         url: /about/
-  - title: "Data Contest"
+  - title: "Data Mining"
     children:
       - title: "Dacon"
         url: https://jihyun22.github.io/categories/#데이콘리뷰
       - title: "Kaggle"
         url: https://jihyun22.github.io/categories/#kaggle
+      - title: "etc"
+        url: https://jihyun22.github.io/categories/#데이터분석
   - title: "Algorithm"
     children:
       - title: "BookReview"
@@ -33,10 +35,6 @@ docs:
         url: https://jihyun22.github.io/categories/#leetcode
       - title: "groom"
         url: https://jihyun22.github.io/categories/#groom
-  - title: "Data Mining"
-    children:
-      - title: "examples"
-        url: https://jihyun22.github.io/categories/#데이터분석
   - title: "Study"
     children:
       - title: "정보보안기사"
@@ -45,5 +43,5 @@ docs:
         url: https://jihyun22.github.io/categories/#정보처리기사
       - title: "빅데이터분석기사"
         url: https://jihyun22.github.io/categories/#빅데이터분석기사
-      - title: "ect"
-        url: https://jihyun22.github.io/categories/#study_ect
+      - title: "etc"
+        url: https://jihyun22.github.io/categories/#study

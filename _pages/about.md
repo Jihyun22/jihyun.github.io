@@ -1,6 +1,6 @@
 ---
 title: " "
-layout: about
+layout: posts
 permalink: /about/
 author_profile: true
 ---

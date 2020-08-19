@@ -14,11 +14,14 @@ main:
   #   url: /sitemap/
  
 docs:
+  - label: "Home"
+      icon: "fab fa-fw fa-github"
+      url: https://jihyun22.github.io
   - title: "Home"
     url : https://jihyun22.github.io
     children:
       - title: "토막글"
-      - url: https://jihyun22.github.io/categories/#issue
+        url: https://jihyun22.github.io/categories/#issue
   - title: "Data Science"
     children:
       - title: "Dacon Contest"

@@ -31,7 +31,7 @@ docs:
     children:
       - title: "LeetCode"
         url: https://jihyun22.github.io/categories/#leetcode
-      - title: "Groom"
-        url: https://jihyun22.github.io/categories/#groom
+      - title: "Programmars"
+        url: https://jihyun22.github.io/categories/#programmars
       - title: "Algorithm Study"
         url: https://jihyun22.github.io/categories/#alstudy

@@ -111,7 +111,7 @@ author:
       icon: "fab fa-fw fa-github"
       url: "https://github.com/Jihyun22"
     - label: "Kaggle"
-      icon: "https://github.com/tuomastik/icons/blob/master/kaggle_logo/kaggle_logo_blue_32x32.png?raw=true"
+      icon: "fab fa-fw fa-kaggle"
       url: "https://www.kaggle.com/jihyun22"
 
 # Site Footer

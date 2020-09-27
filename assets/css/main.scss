@@ -7,8 +7,3 @@ $link-color: red;
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap');
-
-.sticky,
-.sidebar__right.sticky {
-  height: 75px; // 65px plus some additional pixels, modify to your taste
-}

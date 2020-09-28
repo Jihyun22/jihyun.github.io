@@ -156,27 +156,25 @@
     float: left;
     width: span(1 of 2); //5 10
 
-    &:nth-child(2n + 1) {
+    &:nth-child(2n) {
       clear: both;
       margin-left: 0;
     }
-
-    &:nth-child(2n + 2) {
-      clear: none;
-      margin-left: gutter(of 10);
+    &:nth-child(2n+1) {
+      clear: both;
+      margin-left: 0;
     }
-  }
 
   @include breakpoint($medium) {
     margin-left: 0; /* override margin*/
     margin-right: 0; /* override margin*/
     width: span(1 of 2); //3 12
 
-    &:nth-child(2) {
+    &:nth-child(2n) {
       clear: none;
     }
 	  
-    &:nth-child(1) {
+    &:nth-child(2n+1) {
       clear: none;
     }
 

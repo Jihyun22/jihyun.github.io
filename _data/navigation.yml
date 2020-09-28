@@ -31,7 +31,7 @@ docs:
   - title: "Deep Learning"
     url: https://jihyun22.github.io/tags/#dl
     children:
-      - title: "cs231n"
+      - title: "Stanfoard-cs231n"
         url: https://jihyun22.github.io/tags/#cs231n
       
   - title: "Contest"
@@ -40,8 +40,5 @@ docs:
         url: https://jihyun22.github.io/tags/#dacon
       - title: "Kaggle"
         url: https://jihyun22.github.io/tags/#kaggle
-        
-  - title: "Algorithm"
-    children:
-      - title: "for Coding Test"
+      - title: "Algorithm"
         url: https://jihyun22.github.io/tags/#algorithm

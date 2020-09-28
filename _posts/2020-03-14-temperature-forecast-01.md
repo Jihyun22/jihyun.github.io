@@ -5,7 +5,7 @@ categories: 데이콘리뷰
 toc: true
 toc_sticky: true
 toc_label: "목차"
-tags : 온도추정대회 DACON ML 머신러닝 ect
+tags : data dacon contest
 ---
 <p>
   <img src="https://visitor-badge.laobi.icu/badge?page_id=jihyun22.github.io/dacon/ect/temperature-forecast-01/" alt="visitor"/>

@@ -14,10 +14,19 @@ layout: archive
   <!--  ![visitors](https://visitor-badge.glitch.me/badge?page_id=https://jihyun22.github.io/) --></p>
 <p>&nbsp;</p>
   
-<h3 class="archive__subtitle">{{ site.data.ui-text[site.locale].recent_posts | default: "" }}</h3>
 
 {% for post in paginator.posts %}
-  {% include archive-single.html %}
+    <div class="recent_posts">
+      <h3 class="archive__subtitle">{{ site.data.ui-text[site.locale].recent_posts | default: "recent_posts" }}</h3>
+      <div class="grid__wrapper">
+        {% for post in site.posts limit:4 %}
+          {% if post.id == page.id %}
+            {% continue %}
+          {% endif %}
+          {% include archive-single.html type="grid" %}
+        {% endfor %}
+      </div>
+    </div>
 {% endfor %}
 
 {% include paginator.html %}

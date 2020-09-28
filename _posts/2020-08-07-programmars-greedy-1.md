@@ -6,6 +6,8 @@ toc: true
 toc_sticky: true
 toc_label: "목차"
 tags : programmars algorithm python contest
+header:
+  teaser: "https://github.com/Jihyun22/Jihyun22.github.io/blob/master/_posts/images/programmars.png?raw=true"
 ---
 
 <p>

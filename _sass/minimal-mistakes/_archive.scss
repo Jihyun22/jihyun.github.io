@@ -172,11 +172,11 @@
     margin-right: 0; /* override margin*/
     width: span(1 of 2); //3 12
 
-    &:nth-child(2n + 1) {
+    &:nth-child(2n) {
       clear: none;
     }
 
-    &:nth-child(4n + 1) {
+    &:nth-child(4n) {
       clear: both;
     }
 
@@ -184,12 +184,7 @@
       clear: none;
       margin-left: gutter(1 of 12);
     }
-
-    &:nth-child(4n + 3) {
-      clear: none;
-      margin-left: gutter(1 of 12);
-    }
-
+	  
     &:nth-child(4n + 4) {
       clear: none;
       margin-left: gutter(1 of 12);

@@ -5,7 +5,7 @@ categories: programmars
 toc: true
 toc_sticky: true
 toc_label: "목차"
-tags : greedy codingtest programmars algorithm python
+tags : programmars algorithm python contest
 ---
 
 <p>

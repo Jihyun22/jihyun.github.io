@@ -156,12 +156,7 @@
     float: left;
     width: span(1 of 2); //5 10
 	  
-    &:nth-child(2n+1) {
-      clear: both;
-      margin-left: 1em;
-    }
-    
-    &:nth-child(2n) {
+    &:nth-child(2) {
       clear: both;
       margin-left: 1em;
     }
@@ -172,11 +167,7 @@
     margin-right: 1em; /* override margin*/
     width: span(1 of 2); //3 12
 
-    &:nth-child(2n) {
-      clear: both;
-      margin-left: 1em;
-    }
-    &:nth-child(2n+1) {
+    &:nth-child(2) {
       clear: both;
       margin-left: 1em;
     }

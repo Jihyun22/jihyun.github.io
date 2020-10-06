@@ -157,7 +157,7 @@
     width: span(1 of 2); //5 10
 	  
     &:nth-child(2n) {
-      clear: none;
+      clear: both;
       margin-left: 1em;
     }
   }
@@ -168,7 +168,7 @@
     width: span(1 of 2); //3 12
 
     &:nth-child(2n) {
-      clear: none;
+      clear: both;
       margin-left: 1em;
     }
   }

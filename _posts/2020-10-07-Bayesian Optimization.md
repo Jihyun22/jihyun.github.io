@@ -394,7 +394,7 @@ $$
 
 이상으로 Bayesian Optimization에 대해 살펴보았습니다. 실제 적용에 대해서는 데이콘의 심리성향 예측 대회 데이터를 바탕으로 다루겠습니다. 아래 링크에서 확인할 수 있습니다.
 
-- [데이콘 심리성향 예측 대회] AUTO ML - 베이지안 최적화 (Bayesian Optimization) 바로가기 [링크](jihyun22.github.io/데이콘리뷰/psychology-02/)
+- [데이콘 심리성향 예측 대회] AUTO ML - 베이지안 최적화 (Bayesian Optimization) 바로가기 [링크](https://jihyun22.github.io/데이콘리뷰/psychology-02/)
 
 <br/>
 

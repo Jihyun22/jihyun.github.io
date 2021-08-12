@@ -89,25 +89,17 @@ Auto ML 을 적용하면 학습률(learning rate), 배치 크기(batch size) 등
 
 <br/>
 
-Maual Search 는 수동적으로 파라미터 값을 탐색하는 방법입니다. 여러번의 탐색 과정 중 가장 좋은 결과값을 선택하는 방법으로 주관과 직관에 기반합니다.
+수동적으로 파라미터 값을 탐색하는 방법입니다. 여러번의 탐색 과정 중 가장 좋은 결과값을 선택하는 방법으로 주관과 직관에 기반합니다.
 
 이 방법은 실험을 통해 도출된 결과값이 **실제 최적값인지** 의문을 해소하기 어렵습니다.
 
-![](https://github.com/Jihyun22/Jihyun22.github.io/blob/master/_posts/images/bo/ms.png?raw=true)
+![](http://research.sualab.com/assets/images/bayesian-optimization-overview-1/unluck-in-manual-search-process.gif)
 
 <center> <small> <em> 출처는 포스트 하단에 일괄 명시했습니다. </em></small></center>
 
 <br/>
 
-나아가 한번에 하나의 파라미터를 추정하는 것이 아니라, 일반적으로 한번에 여러 종류의 파라미터를 동시에 탐색하는데 이러한 경우 파라미터 간 **상호 연관 관계를 무시할 수 없기에** 더욱 복잡한 연산을 수행해야 합니다. 
-
-<br/>
-
-예시로 Learning rate와 L2 정규화 계수는 서로 상관 관계가 있는 파라미터로 Maual Search 방법으로 조정하기가 어렵습니다.
-
-![](https://github.com/Jihyun22/Jihyun22.github.io/blob/master/_posts/images/bo/ms2.png?raw=true)
-
-<center> <small> <em> Lr 과 L2의 관계식 </em></small></center>
+나아가 한번에 하나의 파라미터를 추정하는 것이 아니라, 일반적으로 한번에 여러 종류의 파라미터를 동시에 탐색하는데 이러한 경우 파라미터 간 **상호 연관 관계를 무시할 수 없기에** 더욱 복잡한 연산을 수행해야 합니다. (예. Learning rate와 L2 정규화 계수)
 
 <br/>
 
@@ -121,13 +113,13 @@ Maual Search 는 수동적으로 파라미터 값을 탐색하는 방법입니�
 
 Grid Search 는 Maual Search 의 단점을 보완하여 탐색 구간 내 추정하고자 하는 하이퍼파라미터 값 들을 일정한 간격을 두고 선정하여 가장 높은 성능을 발휘했던 하이퍼파라미터 값을 최종 선정하는 방법입니다.
 
-![](https://github.com/Jihyun22/Jihyun22.github.io/blob/master/_posts/images/bo/gs.png?raw=true)
+![](http://research.sualab.com/assets/images/bayesian-optimization-overview-1/grid-search-process.gif)
 
 <center> <small> <em> 출처는 포스트 하단에 일괄 명시했습니다. </em></small></center>
 
 <br/>
 
-물론 전체 탐색 대상 구간의 설정 방법, 간격의 길이 설정 방법 등 수동적인 요소는 남아있지만, 균등하고 전역적인 탐색이 가능합니다. 그러나 **추정하고자 하는 하이퍼 파라미터 개수를 늘리게 되면 탐색해야 할 구간도 비례하여 증가하므로 탐색 연산 비용이 기하급수적으로 증가하게 됩니다.** 
+물론 전체 탐색 대상 구간의 설정 방법, 간격의 길이 설정 방법 등 수동적인 요소는 남아있으나 균등하고 전역적인 탐색이 가능합니다. 그러나 추정하고자 하는 하이퍼 파라미터 개수를 늘리게 되면 탐색 연산 비용이 기하급수적으로 증가하게 됩니다. 
 
 <br/>
 
@@ -141,7 +133,7 @@ Grid Search 는 Maual Search 의 단점을 보완하여 탐색 구간 내 추정
 
 Random Search는 Grid Search와 비슷한 맥락으로 탐색 대상 구간 내 하이퍼 파라미터 값들을 랜덤 샘플링을 통해 선정합니다.
 
-![](https://github.com/Jihyun22/Jihyun22.github.io/blob/master/_posts/images/bo/rs.png?raw=true)
+![](http://research.sualab.com/assets/images/bayesian-optimization-overview-1/random-search-process.gif)
 
 <center> <small> <em> 출처는 포스트 하단에 일괄 명시했습니다. </em></small></center>
 
@@ -161,13 +153,9 @@ Grid Search에 비해 불필요한 반복 수행 횟수를 줄일 수 있다는 
 
 <br/>
 
-Random Search와 Grid Search는 하이퍼파라미터 값들의 **성능 결과에 대한 이전의 학습 결과가 반영되지 않습니다**.
+Random Search와 Grid Search는 하이퍼파라미터 값들의 **성능 결과에 대한 이전의 학습 결과가 반영되지 않습니다**. Maual Search의 경우 이전의 학습 결과를 바탕으로 수동으로 조합 값들을 조정했지만 Random Search와 Grid Search는 아직도 불필요한 탐색이 반복됩니다.
 
-<br/>
-
-Maual Search의 경우 이전의 학습 결과를 바탕으로 수동으로 조합 값들을 조정했지만 Random Search와 Grid Search는 아직도 불필요한 탐색이 반복됩니다.
-
-**이제부터 소개할 Bayesian Optimization방법은 이와 다르게 이전의 학습 결과를 반영하여 최적 조합을 탐색할 수 있습니다.**
+Bayesian Optimization방법은 이와 다르게 이전의 학습 결과를 반영하여 최적 조합을 탐색할 수 있습니다.
 
 ---
 
@@ -226,31 +214,21 @@ end
 <br/>
 위 식과 같이 평균 함수 μ와 공분산 함수 k를 사용하여 함수들에 대한 확률 분포를 표현합니다. 사진으로 각 함수의 역할을 자세히 살펴보겠습니다.
 
-![](https://github.com/Jihyun22/Jihyun22.github.io/blob/master/_posts/images/bo/gp.png?raw=true)
+![](http://research.sualab.com/assets/images/bayesian-optimization-overview-1/bayesian-optimization-procedure-example.png)
 
 <center> <small> <em> 출처는 포스트 하단에 일괄 명시했습니다. </em></small></center>
 
 <br/>
 
-위 사진은 t=2,3,4... 에 따라 GP의 연산 과정입니다. 초록색 음영은 Acquisition Function으로 다음 입력값 x를 탐색하고, 보라색 음영과 검정색 실선은 Gaussian Processes으로 f를 추정합니다. 검정색 점선은 **실제 f 값인 미지의 목적 함수**입니다.
+위 사진은 t=2,3,4... 에 따라 GP의 연산 과정입니다. 초록색 음영은 Acquisition Function으로 다음 입력값 x를 탐색하고, 보라색 음영과 검정색 실선은 Gaussian Processes으로 f를 추정합니다. 검정색 점선은 실제 f 값인 미지의 함수입니다.
 
- t=2에서 Acquisition Function을 통해 다음 입력값 x(🔻으로 표시)를 탐색합니다.
+ t=2에서 Acquisition Function을 통해 다음 입력값 x(🔻으로 표시)를 탐색합니다. t=3에서 탐색된 입력값 x의 함수값(🔴)을 계산한 후 다음 입력값 x를 재 탐색합니다. 해당 과정을 반복하여 f의 최대값을 추정할 수 있습니다.
 
-<br/>
+Gaussian Processes 부분을 자세히 살펴보겠습니다. 중앙 검정색 실선은 입력값 x에 대한 평균값 μ(x)이고, 검정색 실선을 둘러싼 보라색 음영은 x 위치 별 표준편차 σ(x)입니다.
 
-t=3에서 탐색된 입력값 x의 함수값(🔴)을 계산한 후 다음 입력값 x를 재 탐색합니다. **해당 과정을 반복하여 f의 최대값을 추정할 수 있습니다.**
+σ(x)의 값을 살펴보면, 조사된 점(위 사진의 observation(x))의 값에서 멀어질수록 σ(x)이 크게 나타납니다(t=2에서 보라색 음영이 확장). 즉, 추정한 평균값 μ(x)의 **불확실성이 크다**는 뜻입니다.
 
-<br/>
-
-Gaussian Processes 부분을 자세히 살펴보겠습니다. <u>중앙 검정색 실선은 입력값 x에 대한 평균값 μ(x)</u>이고, <u>검정색 실선을 둘러싼 보라색 음영은 x 위치 별 표준편차 σ(x)</u>입니다.
-
-<br/>
-
-σ(x)의 값을 살펴보면, 조사된 점(위 사진의 observation(x))의 값에서 멀어질수록 σ(x)이 크게 나타납니다(t=2에서 보라색 음영이 확장). 즉, <u>추정한 평균값 μ(x)의 **불확실성이 크다**는 뜻입니다.</u>
-
-<br/>
-
-거듭 연산이 진행될수록 `f`의 추정 결과가 압축됩니다(t=4 에서 보라색 음영의 축소). 즉, 조사된 점의 개수가 늘어날수록 평균값 μ(x)의 **불확실성이 감소**됩니다. <u>불확실성이 감소될수록 최적 입력값 x를 찾을 가능성이 높아집니다.</u>
+거듭 연산이 진행될수록 `f`의 추정 결과가 압축됩니다(t=4 에서 보라색 음영의 축소). 즉, 조사된 점의 개수가 늘어날수록 평균값 μ(x)의 **불확실성이 감소**됩니다. 불확실성이 감소될수록 최적 입력값 x를 찾을 가능성이 높아집니다.
 
 <br/>
 
@@ -297,7 +275,7 @@ Expected Improvement는 현재까지 추정된 `f`를 바탕으로 어떤 입력
 
 고려하여 `x`의 유용성을 반환합니다. 아래 그래프로 자세히 살펴보겠습니다.
 
-![](https://github.com/Jihyun22/Jihyun22.github.io/blob/master/_posts/images/bo/ei.png?raw=true)
+![](http://research.sualab.com/assets/images/bayesian-optimization-overview-1/probability-of-improvement-in-gaussian-process-example.png)
 
 <center> <small> <em> 출처는 포스트 하단에 일괄 명시했습니다. </em></small></center>
 
@@ -305,13 +283,9 @@ Expected Improvement는 현재까지 추정된 `f`를 바탕으로 어떤 입력
 
 위 그래프는 `x+` 이 계산된 `f`에 대해 **다음 후보 입력값인 `x1`, `x2`,`x3` 중 가장 유용한 값을 탐색**하는 과정입니다.
 
-오른쪽의 초록색 음영은 **최대 함수값 `f(x+)` 보다 큰 함수값을 도출할 확률** `PI(x3)` 로,  <u>다음 입력값으로 `x3`을 채택하는 것이 가장 유용하다고 판단됩니다.</u>
+오른쪽의 초록색 음영은 **최대 함수값 `f(x+)` 보다 큰 함수값을 도출할 확률** `PI(x3)` 로,  다음 입력값으로 `x3`을 채택하는 것이 가장 유용하다고 판단됩니다.
 
-따라서 `PI(x3)`값에 함수값 f(x3)에 대한 평균(검정색 실선에 해당하는 `μ(x3)`값) 과 **f(x3)-f(x+)을 가중하여** 최종 EI를 계산합니다.
-
-<br/>
-
-이 계산 과정을 통해 **f(x+)보다 큰 함수값을 도출할 수 있는 가능성** 뿐 아니라 **실제로 f(x3)값이 f(x+)보다 얼마나 더 큰 값**인지도 반영할 수 있습니다.
+따라서 `PI(x3)`값에 함수값 f(x3)에 대한 평균(검정색 실선에 해당하는 μ(x3)값)과 f(x3)-f(x+)을 가중하여 최종 EI를 계산합니다. 이 계산 과정을 통해 **f(x+)보다 큰 함수값을 도출할 수 있는 가능성** 뿐 아니라 **실제로 f(x3)값이 f(x+)보다 얼마나 더 큰 값**인지도 반영할 수 있습니다.
 
 <br/>
 수식으로 살펴보겠습니다.
@@ -342,7 +316,7 @@ $$
 
 - ϕ : 표준정규분포의 확률분포함수(PDF)
 
-- ξ : exploration과 exploitation 간의 <u>상대적 강도를 조절해 주는 파라미터</u>
+- ξ : exploration과 exploitation 간의 상대적 강도를 조절해 주는 파라미터
 
   - 클수록 exploration의 강도가 높아짐
 
@@ -394,7 +368,7 @@ $$
 
 이상으로 Bayesian Optimization에 대해 살펴보았습니다. 실제 적용에 대해서는 데이콘의 심리성향 예측 대회 데이터를 바탕으로 다루겠습니다. 아래 링크에서 확인할 수 있습니다.
 
-- [데이콘 심리성향 예측 대회] AUTO ML - 베이지안 최적화 (Bayesian Optimization) 바로가기 [링크](https://jihyun22.github.io/데이콘리뷰/psychology-02/)
+- [데이콘 심리성향 예측 대회] AUTO ML - 베이지안 최적화 (Bayesian Optimization) 바로가기 [링크](jihyun22.github.io/데이콘리뷰/psychology-02/)
 
 <br/>
 

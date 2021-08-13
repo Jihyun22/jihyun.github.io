@@ -10,6 +10,24 @@
     
     
     <url>
+        <loc>https://jihyun22.github.io/tags/</loc>
+        <lastmod>2021-08-13T04:34:17.151Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    
+    
+    <url>
+        <loc>https://jihyun22.github.io/categories/</loc>
+        <lastmod>2021-08-13T04:34:10.560Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    
+    
+    <url>
         <loc>https://jihyun22.github.io/about/</loc>
         <lastmod>2021-08-12T14:12:12.440Z</lastmod>
         <changefreq>weekly</changefreq>

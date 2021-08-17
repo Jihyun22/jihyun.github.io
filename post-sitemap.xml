@@ -9,16 +9,8 @@
 
 
     <url>
-        <loc>https://jihyun22.github.io/2020/03/15/temperature-forecast-02/</loc>
-        <lastmod>2021-08-17T09:59:11.522Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jihyun22.github.io/2020/03/14/temperature-forecast-01/</loc>
-        <lastmod>2021-08-17T09:59:10.339Z</lastmod>
+        <loc>https://jihyun22.github.io/2020/10/07/Bayesian-Optimization/</loc>
+        <lastmod>2021-08-17T10:16:04.843Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -26,15 +18,23 @@
 
     <url>
         <loc>https://jihyun22.github.io/2020/03/15/time-series/</loc>
-        <lastmod>2021-08-17T09:56:18.895Z</lastmod>
+        <lastmod>2021-08-17T10:06:47.330Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
     </url>
 
     <url>
-        <loc>https://jihyun22.github.io/2020/10/07/Bayesian-Optimization/</loc>
-        <lastmod>2021-08-17T09:56:07.315Z</lastmod>
+        <loc>https://jihyun22.github.io/2020/03/15/temperature-forecast-02/</loc>
+        <lastmod>2021-08-17T10:06:29.441Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://jihyun22.github.io/2020/03/14/temperature-forecast-01/</loc>
+        <lastmod>2021-08-17T10:06:17.699Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -42,7 +42,7 @@
 
     <url>
         <loc>https://jihyun22.github.io/2020/08/19/leetcode-08-19/</loc>
-        <lastmod>2021-08-17T09:12:10.991Z</lastmod>
+        <lastmod>2021-08-17T10:06:01.152Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -50,7 +50,7 @@
 
     <url>
         <loc>https://jihyun22.github.io/2020/08/18/leetcode-08-18/</loc>
-        <lastmod>2021-08-17T09:12:00.652Z</lastmod>
+        <lastmod>2021-08-17T10:05:42.926Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -58,7 +58,7 @@
 
     <url>
         <loc>https://jihyun22.github.io/2020/08/17/leetcode-08-17/</loc>
-        <lastmod>2021-08-17T09:11:50.579Z</lastmod>
+        <lastmod>2021-08-17T10:05:25.071Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -66,7 +66,7 @@
 
     <url>
         <loc>https://jihyun22.github.io/2020/08/16/leetcode-08-16/</loc>
-        <lastmod>2021-08-17T09:11:40.368Z</lastmod>
+        <lastmod>2021-08-17T10:04:54.512Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

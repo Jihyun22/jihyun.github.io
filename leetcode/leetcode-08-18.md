@@ -1,0 +1,235 @@
+---
+title: "[LeetCode] Numbers With Same Consecutive Differences"
+toc: true
+widgets:
+  - type: toc
+    position: right
+  - type: recent_posts
+    position: right
+  - type: followit
+    position: right
+sidebar:
+  right:
+    sticky: true
+date: 2020-08-18 15:00:00
+cover: /img/cover/leetcode_cover.png
+thumbnail: /img/thumbnail/leetcode_th.png
+categories:
+  - Algorithm
+  - leetcode
+tags:
+  - leetcode
+  - algorithm
+  - python
+---
+
+
+
+
+LeetCoding Challenge의 8월 18일 **'Numbers With Same Consecutive Differences'** 문제 풀이입니다. 
+
+- August LeetCoding Challenge [*week-3-august-15th-august-21st*](https://leetcode.com/explore/challenge/card/august-leetcoding-challenge/551/week-3-august-15th-august-21st/)
+
+<!-- more -->
+
+
+
+## **🎯 문제**
+
+> Return all **non-negative** integers of length `N` such that the absolute difference between every two consecutive digits is `K`.
+>
+> Note that **every** number in the answer **must not** have leading zeros **except** for the number `0` itself. For example, `01` has one leading zero and is invalid, but `0` is valid.
+>
+> You may return the answer in any order.
+>
+> **Note:**
+>
+> 1. `1 <= N <= 9`
+> 2. `0 <= K <= 9`
+
+N은 자릿수, K는 연속된 두 자리 수 사이의 절대 차이로 N과 K를 만족하는 양의 정수(0을 포함하는 자연수)를 반환하는 문제입니다. 이때 반환 순서는 고려할 필요 없으며, 맨 첫자리에 0이 오는 경우는 제외합니다 (01은 유효하지 않음, 0은 유효함).
+
+
+
+### **Test Case1**
+
+```python
+Input: N = 3, K = 7
+Output: [181,292,707,818,929]
+```
+
+### **Test Case2**
+
+```python
+Input: N = 2, K = 1
+Output: [10,12,21,23,32,34,43,45,54,56,65,67,76,78,87,89,98]
+```
+
+
+
+## 🔍 풀이
+
+### **해설**
+
+이 문제의 edge event는 N=1인 경우의 수 입니다. 이때 결과값은 ```range(10)``` 으로 0이 포함됩니다. 따라서 사전에 edge event를 처리해 주는 것이 문제 풀이의 해법이 될 수 있습니다. 
+
+자리수 N을 고려하여 숫자를 조합하는 것도 까다롭습니다. 이때 a*10 + b 꼴에서 a에 10의 자리의 수가 들어가면 100의 자리의 수가 된다는 점을 고려한다면 보다 쉽게 접근할 수 있습니다.
+
+또한 첫째 자리 수(a*10 + b 에서 a)가 0이 되면 제외된다는 조건은 ``` if a ``` 로 쉽게 처리할 수 있습니다.
+
+
+
+#### **자리수 N 연산**
+
+첫번째 테스트 케이스(N=3, K=7)를 예시로 설명하겠습니다.
+
+```result = range(10)``` 이 사전 정의된 경우에서 아래의 코드가 N-1만큼 반복된다면,
+
+```python
+result = {a * 10 + b
+          for a in result
+          for b in [a % 10 + K, a % 10 - K]
+          if a and 0 <= b < 10}
+```
+
+result의 값은 다음의 표와 같이 계산됩니다.
+
+| 0 to N-1 |  a   |  b   |           result            |
+| :------: | :--: | :--: | :-------------------------: |
+|    0     |  1   |  8   | 18, 2, 3, 4, 5, 6, 7, 8, 9  |
+|    0     |  2   |  9   | 18, 29, 3, 4, 5, 6, 7, 8, 9 |
+|    0     |  7   |  0   |      18, 29, 70, 8, 9       |
+|    0     |  8   |  1   |      18, 29, 70, 81, 9      |
+|    0     |  9   |  2   |     18, 29, 70, 81, 92      |
+|    1     |  18  |  1   |     181, 29, 70, 81, 92     |
+|    1     |  29  |  2   |     292, 181,70, 81, 92     |
+|    1     |  70  |  7   |    707, 292, 181, 81, 92    |
+|    1     |  81  |  8   |   818, 707, 292, 181, 92    |
+|    1     |  92  |  9   |   929, 818, 707, 292, 181   |
+
+
+
+### **코드** 
+
+사용 언어는 <code>python3</code>입니다.
+
+```python
+# python
+# [LeetCode] week-3-august-18th
+# Numbers With Same Consecutive Differences
+# @Jihyun22
+
+# N과 K가 공백 기준으로 입력되는 경우
+N, K = list(map(int, input().split(" ")))
+
+def sol(N, K):
+    # 0부터 9까지의 result에 저장
+    result = range(10)
+    # 자리수 만큼 반복
+    # N=1이면 result = range(10) 반환(edge event)
+    for i in range(N - 1):
+        result = {  # 자리수 고려
+                    a * 10 + b
+                    # result에 저장된 수 만큼 a연산 반복
+                    for a in result
+                    # a, b의 절대 차는 K
+                    for b in [a % 10 + K, a % 10 - K]
+                    # a에는 0이 올 수 없으며, b는 0~9 까지의 자연수
+                    if a and 0 <= b < 10}
+    return list(result)
+
+print(sol(N, K))
+```
+
+
+
+## **📝 Submit**
+
+LeetCode 제출 코드입니다.
+
+```python
+class Solution:
+    def numsSameConsecDiff(self, N: int, K: int) -> List[int]:
+        result = range(10)
+        for i in range(N - 1):
+            result = {a * 10 + b
+                      for a in result
+                      for b in [a % 10 + K, a % 10 - K]
+                      if a and 0 <= b < 10}
+        return list(result)
+```
+
+*LeetCode는 사용 언어 별 default 형식으로 작성해야 평가가 진행됩니다.* 
+
+
+
+### **채점 결과**
+
+![leetcode-08-18-Runtime](https://jihyun22.github.io/img/lc/0818.JPG)
+
+채점 결과, run time은 상위 0.5%정도로 좋은 성과를 얻을 수 있었습니다.
+
+
+
+![leetcode-08-17-Memory](https://jihyun22.github.io/img/lc/0818_2.JPG)
+
+다만 메모리 측면에서는 아쉬움이 남습니다.  재귀법을 사용한 코드가 메모리 효율이 가장 높았습니다. 해당 코드의 일부를 첨부합니다.
+
+```  python
+if N == 1:
+	return list(range(10)) 
+output = []
+def addRecursive(digits, N, K, output):
+	if len(digits) == N:
+        x = 0
+        for d in digits:
+            x = 10 * x + d
+        output.append(x)
+    else:
+        y = digits[-1]
+        if y >= K:
+            addRecursive(digits + [y-K], N, K, output)
+        if K > 0 and y+K <= 9:
+            addRecursive(digits + [y+K], N, K, output)
+    for k in range(1, 10):
+        addRecursive([k], N, K, output)
+    return output
+```
+
+
+
+추가로 덧붙이면, 이 문제는 보편적인 dfs 문제 유형입니다. 기회가 된다면 dfs로 풀이하는 것도 큰 도움이 될 것 같습니다. dfs 풀이 코드도 첨부하겠습니다.
+
+```python
+class Solution:
+    def numsSameConsecDiff(self, N: int, k: int) -> List[int]:
+        ans = list()
+        if N == 1:
+            ans.append(0)
+        def dfs(n,num):
+            if n == 0:
+                ans.append(num)
+                return
+            t = num%10
+            digits = {t+k}
+            digits.add(t-k)
+            for d in digits:
+                if -1 < d < 10:
+                    dfs(n-1,(num*10)+d)
+        for x in range(1,10):
+            dfs(N-1,x)
+        return ans
+```
+
+
+
+---
+
+
+
+**관련 카테고리 포스트 더보기**
+
+> [Algorithm 관련 포스트 더보기](https://jihyun22.github.io/categories/Algorithm/)
+>
+> [Leetcode 관련 포스트 더보기](https://jihyun22.github.io/categories/Algorithm/leetcode/)
+

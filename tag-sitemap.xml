@@ -3,6 +3,27 @@
 
 
     <url>
+        <loc>https://jihyun22.github.io/tags/python/</loc>
+        <lastmod>2021-08-17T10:35:43.674Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jihyun22.github.io/tags/algorithm/</loc>
+        <lastmod>2021-08-17T10:35:43.674Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jihyun22.github.io/tags/leetcode/</loc>
+        <lastmod>2021-08-17T10:35:43.674Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://jihyun22.github.io/tags/Hyperparameter/</loc>
         <lastmod>2021-08-17T10:22:07.480Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -40,27 +61,6 @@
     <url>
         <loc>https://jihyun22.github.io/tags/Dacon/</loc>
         <lastmod>2021-08-17T10:06:29.441Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://jihyun22.github.io/tags/python/</loc>
-        <lastmod>2021-08-17T10:06:01.152Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://jihyun22.github.io/tags/algorithm/</loc>
-        <lastmod>2021-08-17T10:06:01.152Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://jihyun22.github.io/tags/leetcode/</loc>
-        <lastmod>2021-08-17T10:06:01.152Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

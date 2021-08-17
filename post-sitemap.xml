@@ -9,6 +9,30 @@
 
 
     <url>
+        <loc>https://jihyun22.github.io/2020/08/19/leetcode-08-19/</loc>
+        <lastmod>2021-08-17T10:35:43.674Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://jihyun22.github.io/2020/08/18/leetcode-08-18/</loc>
+        <lastmod>2021-08-17T10:35:27.671Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://jihyun22.github.io/2020/08/17/leetcode-08-17/</loc>
+        <lastmod>2021-08-17T10:35:12.095Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://jihyun22.github.io/2020/10/07/Bayesian-Optimization/</loc>
         <lastmod>2021-08-17T10:22:07.480Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -35,30 +59,6 @@
     <url>
         <loc>https://jihyun22.github.io/2020/03/14/temperature-forecast-01/</loc>
         <lastmod>2021-08-17T10:06:17.699Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jihyun22.github.io/2020/08/19/leetcode-08-19/</loc>
-        <lastmod>2021-08-17T10:06:01.152Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jihyun22.github.io/2020/08/18/leetcode-08-18/</loc>
-        <lastmod>2021-08-17T10:05:42.926Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jihyun22.github.io/2020/08/17/leetcode-08-17/</loc>
-        <lastmod>2021-08-17T10:05:25.071Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

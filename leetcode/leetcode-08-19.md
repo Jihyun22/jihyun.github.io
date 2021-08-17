@@ -1,0 +1,178 @@
+---
+title: "[LeetCode] Goat Latin"
+toc: true
+widgets:
+  - type: toc
+    position: right
+  - type: recent_posts
+    position: right
+  - type: followit
+    position: right
+sidebar:
+  right:
+    sticky: true
+date: 2020-08-19 15:00:00
+cover: /img/cover/leetcode_cover.png
+thumbnail: /img/thumbnail/leetcode_th.png
+categories:
+  - Algorithm
+  - leetcode
+tags:
+  - leetcode
+  - algorithm
+  - python
+---
+
+LeetCoding Challenge의 8월 19일 **'Goat Latin'** 문제 풀이입니다. 
+
+- August LeetCoding Challenge [*week-3-august-15th-august-21st*](https://leetcode.com/explore/challenge/card/august-leetcoding-challenge/551/week-3-august-15th-august-21st/)
+
+<!-- more -->
+
+
+
+## **🎯 문제**
+
+> 1. A sentence `S` is given, composed of words separated by spaces. Each word consists of lowercase and uppercase letters only.
+>
+>    We would like to convert the sentence to "*Goat Latin"* (a made-up language similar to Pig Latin.)
+>
+>    The rules of Goat Latin are as follows:
+>
+>    - If a word begins with a vowel (a, e, i, o, or u), append `"ma"` to the end of the word.
+>      For example, the word 'apple' becomes 'applema'.
+>       
+>    - If a word begins with a consonant (i.e. not a vowel), remove the first letter and append it to the end, then add `"ma"`.
+>      For example, the word `"goat"` becomes `"oatgma"`.
+>       
+>    - Add one letter `'a'` to the end of each word per its word index in the sentence, starting with 1.
+>      For example, the first word gets `"a"` added to the end, the second word gets `"aa"` added to the end and so on.
+>
+>    Return the final sentence representing the conversion from `S` to Goat Latin. 
+
+문장을 입력받아 " "공백을 기준으로 한 단어 단위로 나눕니다. 각 단어의 앞글자가 모음인 경우, "ma"를 붙이며, 자음인 경우 앞글자를 제거한 뒤 "ma"를 붙입니다. 또한 문장의 단어 순서대로 차례대로 누적하여 "a"를 붙이고, 최종 결과를 문장으로 반환합니다.
+
+
+
+### **Test Case1**
+
+```python
+Input: "I speak Goat Latin"
+Output: "Imaa peaksmaaa oatGmaaaa atinLmaaaaa"
+```
+
+### **Test Case2**
+
+```python
+Input: "The quick brown fox jumped over the lazy dog"
+Output: "heTmaa uickqmaaa rownbmaaaa oxfmaaaaa umpedjmaaaaaa overmaaaaaaa hetmaaaaaaaa azylmaaaaaaaaa ogdmaaaaaaaaaa"
+```
+
+
+
+## **🔍 풀이**
+
+### **해설**
+
+문제의 난이도가 낮아 자세한 설명은 아래의 코드 및 주석으로 대체하겠습니다.
+
+
+
+### **코드** 
+
+사용 언어는 <code>python3</code>입니다.
+
+```python
+# python
+# [LeetCode] week-3-august-18th
+# Goat Latin
+# @Jihyun22
+
+# 문장을 입력받아 공백을 기준으로 list에 저장
+S = list(map(str, input().split(' ')))
+
+for i in range(0, len(S)):
+    # 맨 앞 문자가 자음이면
+    if S[i][0].lower() not in ['a', 'e', 'i', 'o', 'u']:
+        # 앞 문자를 뒤로 add
+        S[i] = S[i][1:] + S[i][0]
+    # "ma" add
+    # 'a'를 공백 수+1 만큼 add
+    S[i] += "ma" + "a"*(i+1)
+
+print(' '.join(S).strip(" "))
+```
+
+
+
+## **📝 Submit**
+
+LeetCode 제출 코드입니다.
+
+```python
+class Solution:
+    def toGoatLatin(self, S: str) -> str:
+        S = list(map(str, S.split(' ')))
+        for i in range(0, len(S)):
+            if S[i][0].lower() not in ['a', 'e', 'i', 'o', 'u']:
+                S[i] = S[i][1:] + S[i][0]
+            S[i] += "ma"+"a"*(i+1)
+
+        return ' '.join(S).strip(" ")
+```
+
+*LeetCode는 사용 언어 별 default 형식으로 작성해야 평가가 진행됩니다.* 
+
+
+
+### **채점 결과**
+
+![leetcode-08-18-Runtime](https://jihyun22.github.io/img/lc/0819.JPG)
+
+
+
+채점 결과, run time은 중-하위 수준이였습니다. 상위 코드를 살펴보니 조금 단순하게 접근한 것이 특징이었습니다. 해당 코드를 첨부하겠습니다.
+
+```python
+class Solution:
+    def toGoatLatin(self, S: str) -> str:
+         
+        W = S.split(" ")
+        out = ''
+        
+        for i, s in enumerate(W):
+            
+            if s[0].lower()  in ['a', 'e', 'i', 'o', 'u']:
+                s = s + "ma"
+            else:
+                s = s[1:] + s[0]
+                s = s + "ma"
+                
+            while(i>=0):
+                s = s + 'a'
+                i = i-1
+                
+            out = out + s + " "
+            
+        print(W)   
+        return out[0:len(out)-1]
+```
+
+
+
+![leetcode-08-18-Memory](https://jihyun22.github.io/img/lc/0819_2.JPG)
+
+메모리 측면에서는 효율이 높은 편입니다.
+
+
+
+---
+
+
+
+**관련 카테고리 포스트 더보기**
+
+> [Algorithm 관련 포스트 더보기](https://jihyun22.github.io/categories/Algorithm/)
+>
+> [Leetcode 관련 포스트 더보기](https://jihyun22.github.io/categories/Algorithm/leetcode/)
+

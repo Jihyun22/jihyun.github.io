@@ -1,0 +1,363 @@
+---
+title: "시계열 데이터를 다뤄보자 - 비트코인 시세 예측하기"
+toc: true
+widgets:
+  - type: toc
+    position: right
+  - type: recent_posts
+    position: right
+  - type: followit
+    position: right
+sidebar:
+  right:
+    sticky: true
+date: 2020-03-15 15:00:00
+cover: /img/cover/bc_cover.png
+thumbnail: /img/thumbnail/bc_th.png
+categories:
+  - Machine-Learning
+tags:
+  - time-serise
+  - bitcoin
+---
+
+
+
+
+시간 축과 데이터로 이루어진 시계열 데이터, 그 중 불규칙한 시계열 데이터를 살펴보고 ARIMA 모델로 트렌드 예측을 진행합니다.
+
+
+
+비트코인 시세 데이터를 활용하여 시간 축과 데이터로 이루어진 시계열 데이터, 그 중 불규칙한 시계열 데이터를 살펴보고 ARIMA 모델로 트렌드 예측을 진행합니다.
+
+
+
+<!-- more -->
+
+
+
+## 0. 시계열 데이터
+
+시계열 데이터는 연속적인 시간에 따라 다르게 측정되는 데이터입니다.
+
+즉, 관측치가 시간적 순서를 가진 데이터로 변수간의 상관성이 존재하는 데이터를 의미합니다.
+
+1. 규칙적 시계열 데이터를 분석 *(예. 심장박동 데이터)*
+2. 불규칙적 시계열 데이터를 분석 *(예. 비트코인 시세 예측)*
+
+시계열 데이터는 과거의 데이터를 통해서 현재의 동향이나 미래를 예측하는데 사용됩니다. 과거의 특정 구간대의 데이터를 통해 미래를 예측할 수 있다는 것입니다.
+
+이번 포스팅에서는 3년간 비트코인 시세를 바탕으로 일주일 간의 비트코인 시세를 예측해보려고 합니다. blockchain에서 제공하는 데이터를 재가공하여 사용하였으며, 원본 데이터셋은 [링크](https://www.blockchain.com/ko/charts/market-price)에서 다운로드 받을 수 있습니다.
+
+![비트코인 데이터 다운로드 화면](https://jihyun22.github.io/img/bc/1_1.png)
+
+*간혹 확장자가 없는 파일로 다운로드되는데, 확장자 .csv를 붙여주기만 하면 사용할 수 있습니다.*
+
+본 포스팅에서 사용하는 학습 데이터는 3년간 시세 데이터([train.csv](https://github.com/Jihyun22/data_analysis/blob/master/train.csv)) , 테스트 데이터는 7일간 시세 데이터([test.csv](https://github.com/Jihyun22/data_analysis/blob/master/test.csv))를 사용하였습니다. 데이터셋 환경 구축이 완료되었다면 데이터를 로드해보겠습니다.
+
+------
+
+
+
+## 1. 데이터 로드
+
+train데이터를 살펴보면 결측값 없이 1091개의 행과 2개의 칼럼으로 구성되어 있습니다. 2개의 칼럼은 각각 time과 price로 시계열 데이터 구조입니다. 
+
+```python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+# 3년치 데이터 로드
+train_path = 'train.csv'
+train = pd.read_csv(train_path, skiprows = [0], names=['time', 'price'] )
+train.info()
+```
+
+```
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 1091 entries, 0 to 1090
+Data columns (total 2 columns):
+time     1091 non-null object
+price    1091 non-null float64
+dtypes: float64(1), object(1)
+memory usage: 17.2+ KB
+```
+
+
+
+이제 시계열 정보를 `to_datetime`메소드를 사용하여 DataFrame의 index로 설정합니다. 
+
+```python
+# to_datetime 메소드를 통해 day 피처를 시계열 피처 처리
+train['time'] = pd.to_datetime(train['time'])
+# 프레임 인덱스 설정
+train.index = train['time']
+train.set_index('time', inplace=True)
+```
+
+`Pandas`에서 시계열 자료를 생성하기 위해서는 `DatetimeIndex` 자료형으로 데이터 구조를 조작해야 합니다. `to_datetime` 메소드를 사용하면 날짜 또는 시간을 나타내는 문자열을 자동으로 `datetime` 자료형으로 바꾼 후 인덱스를 생성할 수 있습니다. 
+
+
+
+시계열 피처를 처리한 후 시각화 한 결과입니다.
+
+```python
+# 시각화
+train.plot()
+plt.show()
+```
+
+![시각화 결과](https://jihyun22.github.io/img/bc/1_2.png)
+
+------
+
+
+
+## 2. ARIMA 모델
+
+
+
+### 2.1. 모델 소개
+
+`ARIMA` 분석 방법은 크게 두가지 개념을 포함하고 있습니다.
+
++ `AR` 모델 : 현재의 상태는 이전의 상태를 참고해서 계산된다는 전제 하자기 자신의 과거를 정보로 사용하는 개념
++ `MA` 모델 : 이전 항에서의 오차를 이용하여 현재 항의 상태를 추론하겠다는 방법
+
+이 둘을 합친 모델을 `ARMA` 모델이라고 하며, 이에 추세 변동의 경향성까지 반영한 모델이 `ARIMA` 모델입니다.
+
+
+
+`ARIMA` 모델의 특징은 선형관계(Correlation)뿐 아니라 추세관계(Cointegtation)까지 고려한 모델이라는 점입니다. 
+
+선형관계는 현재의 관계를 의미하고, 추세관계는 과거 현상에서 유추할 수 있는 미래의 수치 간 관계를 의미합니다. 변수 X와 Y간 관계로 간단하게 설명하면 아래의 표와 같습니다.
+
+| 구분            |                      Cointegtation > 0                       |                      Cointegtation < 0                       |
+| --------------- | :----------------------------------------------------------: | :----------------------------------------------------------: |
+| Correlation > 0 | X가 양의 값이고 증가하는 추세일 때, Y는 양의 값이고 증가하는 추세 | X가 양의 값이고 증가하는 추세일 때, Y는 양의 값이고 감소하는 추세 |
+| Correlation < 0 | X가 양의 값이고 증가하는 추세일 때, Y는 음의 값이고 증가하는 추세 | X가 양의 값이고 증가하는 추세일 때, Y는 음의 값이고 감소하는 추세 |
+
+
+
+### 2.3 파라미터 조정
+
+파이썬에서는 `statsmodel` 모듈로 `ARIMA` 분석을 할 수 있습니다. `ARIMA` 모델을 구성할 때 클래스에 order = (p, d, q) 파라미터 값을 입력해주어야 하는데 적절한 값을 탐색해보겠습니다. 이때 p는 AR이 몇 번째 과거까지 바라보는지에 대한 파라미터, d는 차분에 대한 파라미터, q는 MA가 몇번째 과거까지 바라보는지에 대한 파라미터를 의미합니다. 
+
+
+
+(p, d, q)의 최적 조합을 찾기 위해 `plot_acf`, `plot_pacf `결과를 살펴보겠습니다.
+
++ ACF :  관측치들 사이 관련성을 측정
++ PACF : K 이외의 모든 다른 시점 관측치의 영향력을 배제하고 일정 시점의 주 관측치의 관련성을 측정
+
+시계열 데이터가 AR의 측성을 띄는 경우, ACF는 천천히 감소하고 PACF는 처음 시차를 제외하고 급격히 감소합니다. MA의 특성을 띄는 경우 AR과 반대로 ACF 값은 급격히 감소, PACF는 천천히 감소하는 경향을 보입니다.
+
+```python
+#ARIMA 의 order 파라미터 p,d,q의 최적 조합 찾기
+from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
+
+plot_acf(train)
+plot_pacf(train)
+plt.show()
+```
+
+![plot_acf 결과](https://jihyun22.github.io/img/bc/1_3.png)
+
+![plot_pacf 결과](https://jihyun22.github.io/img/bc/1_4.png)
+
+ACF 결과를 살펴보면, 자기상관은 항상 양의 값을 가지고 있습니다. p의 값은 크게 조절할 필요가 없다고 판단됩니다. PACF 결과는 처음 시차를 제외하고 급격히 감소합니다. 종합적으로 고려하면 p=0, q=1로 파라미터를 조정하는 것이 적절하다고 판단됩니다.
+
+참고로, p, d, q의 파라미터는 일반적인 가이드라인이 존재합니다. 보통 p와 q의 합이 2미만이거나, p와 q의 곱이 0을 포합한 짝수가 좋은 조합이라고 알려져 있습니다.
+
+
+
+다음은 차분 차수를 계산하기 위해, 우선 1차 차분 후 다시 acf, pacf 를 수행했습니다. 
+
+```python
+# 적절 차분 차수 d 계산 
+tmp=train.diff(periods=1).iloc[1:]
+tmp.plot()
+plot_acf(tmp)
+plot_pacf(tmp)
+plt.show()
+```
+
+![1차 차분 후 tmp plot 결과](https://jihyun22.github.io/img/bc/1_5.png)
+
+![1차 차분 후 plot_acf 결과](https://jihyun22.github.io/img/bc/1_6.png)
+
+![1차 차분 후 plot_pacf 결과](https://jihyun22.github.io/img/bc/1_7.png)
+
+차분이란 현재 상태의 변수에서 바로 전 상태의 변수를 빼주는 것을 의미하며, 시계열 데이터의 불규칙성을 조금이나마 보정해주는 역할을 수행합니다. 또한 ARIMA의 경향성을 반영한 값입니다. 위 결과를 바탕으로 최종 파라미터는 (0,2,1)로 결정하였습니다.
+
+
+
+### 2.3. 모델학습
+
+`ARIMA` 모델을 활용하여 모델 학습을 수행하겠습니다.
+
+```python
+from statsmodels.tsa.arima_model import ARIMA
+import statsmodels.api as sm
+
+model = ARIMA(train.price.values, order=(0,2,1)) #파라미터 설정
+model_fit = model.fit(trend='c', full_output=True, disp=True)
+print(model_fit.summary())
+```
+
+```note
+ARIMA Model Results                              
+==============================================================================
+Dep. Variable:                   D2.y   No. Observations:                 1089
+Model:                 ARIMA(0, 2, 1)   Log Likelihood               -8038.507
+Method:                       css-mle   S.D. of innovations            387.378
+Date:                Sat, 25 Apr 2020   AIC                          16083.015
+Time:                        20:03:06   BIC                          16097.994
+Sample:                             2   HQIC                         16088.684
+                                                                           
+==============================================================================
+              coef    std err          z      P>|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+const         -0.0285      0.037     -0.763      0.445      -0.102       0.045
+ma.L1.D2.y    -1.0000      0.003   -356.421      0.000      -1.005      -0.995
+                                 Roots                                    
+=============================================================================
+               Real          Imaginary           Modulus         Frequency
+-----------------------------------------------------------------------------
+MA.1            1.0000           +0.0000j            1.0000            0.0000
+-----------------------------------------------------------------------------
+```
+
+
+
+`ARIMA` 모델의 t-test 값은 `p-value`로 상수항을 제외한 모든 계수의 ``p-value``가 0.05이하인 경우 유의미합니다. `ma.L1.D2.y` 변수값의 `p-value`는 0.000으로 적정한 파라미터 값을 대입했다고 판단됩니다.
+
+
+
+학습한 모델에 학습 데이터 셋을 넣었을 때 시계열 예측 결과입니다. `plot_predict()` 메소드로 시각화를 자동으로 수행할 수 있습니다.
+
+```python
+# 학습 데이터 예측 결과 -> 양호
+fig = model_fit.plot_predict()
+```
+
+![학습 데이터 예측 결과](https://jihyun22.github.io/img/bc/1_8.png)
+
+
+
+다음은 실제와 예측값 사이 오차 변동(잔차)을 살펴보겠습니다. 잔차의 폭이 일정할 경우 바람직한 학습 결과를 기대할 수 있습니다.
+
+```python
+# 잔차의 변동 시각화
+residuals = pd.DataFrame(model_fit.resid)
+residuals.plot()
+# 폭이 일정해야 좋음 -> 불규칙한 형태
+```
+
+![잔차의 변동 시각화](https://jihyun22.github.io/img/bc/1_9.png)
+
+하지만 실행 결과에서는 상당히 불안정한 잔차값이 나타납니다. 그래도 모델을 추가 수정하지 않고 평가 단계로 넘어가겠습니다.
+
+------
+
+
+
+## 3. 평가
+
+
+
+### 3.1. 예측 결과
+
+모델을 평가하기 위해서 가장 최근 7일치 데이터를 사용하므로, 학습한 모델에서 7일치의 데이터 연산을 진행합니다.
+
+```python
+pred_model = model_fit.forecast(steps=7) #7일 예측
+pred=pred_model[0].tolist()
+```
+
+예측값은 변수 `pred`에 `list`형태로 저장했습니다.
+
+
+
+### 3.2. 시각화
+
+실제 데이터를 로드하고 예측결과와 비교하기 위해 시각화합니다. 예측 최고가격과 최저가격을 설정한 후 실제 가격과 예측 가격을 비교하겠습니다.
+
+```python
+plt.plot(pred, color="blue") # 예측 가격
+plt.plot(pred_lower, color = "gray") # 예측 최저가격
+plt.plot(pred_upper, color = "pink") # 예측 최고가격
+plt.plot(test, color = "red") # 실제가격
+```
+
+![예측된 최저, 최고 가격 비교](https://jihyun22.github.io/img/bc/1_11.png)
+
+예측 가격과 실제 가격의 추이가 비슷한 양상을 띄는 것을 확인할 수 있습니다.
+
+
+
+이번에는 더욱 자세히 비교하기 위해  최저, 최고 가격을 제외하고 예측 가격과 실제 가격만의 그래프를 확인해보겠습니다.
+
+```python
+test=test.price.values # 데이터 형식 list로 변경
+plt.plot(pred, color="blue") # 예측 가격
+plt.plot(test_y, color = "red") # 실제가격
+```
+
+![예측 가격과 실제 가격 비교](https://jihyun22.github.io/img/bc/1_10.png)
+
+세부 결과는 좋지 않았습니다. 예측 가격은 7일동안 낮아질 것으로 나타났으나, 실제 데이터는 등락을 반복하는 경향을 보였습니다. 그러나 최고, 최저 예측 가격의 폭이 약 4000인 것을 고려한다면 600정도(0.15)의 오차는 그렇게 큰 편은 아니라고 판단됩니다.
+
+
+
+### 3.3. 모델평가
+
+rmse를 사용하여 모델을 평가한 결과입니다. 
+
+```python
+from sklearn.metrics import mean_squared_error
+import math
+
+rmse = math.sqrt(mean_squared_error(pred, test_y))
+print(rmse)
+```
+
+```
+270.8342603398055
+```
+
+rmse값은 270으로 처음 감소 추세는 예측 성공하였으나 큰 폭으로 감소하는 결과값을 정확하게 예측하기에는 어려웠습니다. 
+
+------
+
+
+
+## 4. 결론
+
+불규칙한 시계열 예측의 경우, 먼 미래를 예측하는 것은 큰 의미가 없습니다. 따라서 앞으로 N일 동안 어느 정도로 상승(하락)할 것인지 대략적인 Trend 예측만을 수행하는 것이 일반적입니다.
+
+- *참고자료 : 이것이 데이터 분석이다(윤기태 저)*
+
+
+
+---
+
+**관련 카테고리 포스트 더보기**
+
+> [Machine-Learning 관련 포스트 더보기](https://jihyun22.github.io/categories/Machine-Learning/)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

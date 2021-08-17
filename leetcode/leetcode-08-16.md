@@ -1,0 +1,200 @@
+---
+title: "[LeetCode] Best Time to Buy and Sell Stock III"
+toc: true
+widgets:
+  - type: toc
+    position: right
+  - type: recent_posts
+    position: right
+  - type: followit
+    position: right
+sidebar:
+  right:
+    sticky: true
+date: 2020-08-16 15:00:00
+cover: /img/cover/leetcode_cover.png
+thumbnail: /img/thumbnail/leetcode_th.png
+categories:
+  - Algorithm
+  - leetcode
+tags:
+  - leetcode
+  - algorithm
+  - python
+---
+
+
+
+LeetCoding Challenge의 8월 16일 **'Best Time to Buy and Sell Stock III'** 문제 풀이입니다. 
+
+- August LeetCoding Challenge [*week-3-august-15th-august-21st*](https://leetcode.com/explore/challenge/card/august-leetcoding-challenge/551/week-3-august-15th-august-21st/)
+
+
+
+<!-- more -->
+
+
+
+## **🎯 문제**
+
+> Say you have an array for which the *i*th element is the price of a given stock on day *i*.
+>
+> Design an algorithm to find the maximum profit. You may complete at most *two* transactions.
+>
+> **Note:** You may not engage in multiple transactions at the same time (i.e., you must sell the stock before you buy again).
+
+주식의 가격이 날짜별로 주어지면 주식을 사고 팔아서(transaction) 얻을 수 있는 최대 이익을 찾아내는 문제입니다. transaction은 중복으로 이루어질 수 없으며, 최대 2번입니다.
+
+
+
+### **Test Case1**
+
+```python
+Input: [3,3,5,0,0,3,1,4]
+Output: 6
+Explanation: 4일날 주식을 구입하여 6일날 팔고(이익(3-0) = 3), 7일날 구입하여 8일날 팔아서(이익(4-1)=3) 최대 이익은 6 입니다. 
+Note : transaction은 최대 2번 이루어진다는 점에 유의해야 합니다.
+```
+
+### **Test Case2**
+
+```python
+Input: [1,2,3,4,5]
+Output: 4
+Explanation: 1일날 주식을 구입하여 5일날 팔아서(이익(5-1)=4) 최대 이익은 4입니다.
+Note : transaction은 중복해서 이루어지지 않는다는 점에 유의해야 합니다(병행 불가).
+```
+
+### **Test Case3**
+
+```
+Input: [7,6,4,3,1]
+Output: 0
+```
+
+
+
+## **🔍 풀이**
+
+### **해설**
+
+첫번째 테스트 케이스를 예시로 설명하겠습니다.
+
+
+
+#### **첫번째 transaction**
+
+첫번째 transaction은 왼쪽에서 오른쪽으로 이익을 계산합니다. S_min은 stock[:i] 의 최소값이고, 최대 이익은 stock[i] - S_min 의 최대값이 저장됩니다.
+
+|        stock        |  3   |  3   |  5   |  0   |  0   |  3   |  1   |  4   |
+| :-----------------: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: |
+| **최대 이익**(tmp1) |  0   |  0   |  2   |  2   |  2   |  3   |  3   |  4   |
+|      **S_min**      |  3   |  3   |  3   |  0   |  0   |  0   |  0   |  0   |
+
+
+
+#### **두번째 transaction**
+
+두번째 transaction은 오른쪽에서 왼쪽으로 이익을 계산합니다. S_max은 stock[n-i:n] 의 최대값이고, 최대 이익은 S_max - stock[i]의 최대값이 저장됩니다. 
+
+|        stock        |  3   |  3   |  5   |  0   |  0   |  3   |  1   |  4   |
+| :-----------------: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: |
+| **최대 이익**(tmp2) |  4   |  4   |  4   |  4   |  4   |  3   |  3   |  0   |
+|      **S_max**      |  5   |  5   |  5   |  4   |  4   |  4   |  4   |  4   |
+
+
+
+#### **최대 이익 계산**
+
+이때 tmp1[i] + tmp2[i]은 가능한 이익의 경우의 수입니다.
+
+| 이익(tmp1[i]+tmp2[i]) |  4   |  4   |  6   |  6   |  6   |  6   |  6   |  4   |
+| :-------------------: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: |
+|  **최대 이익**(tmp1)  |  0   |  0   |  2   |  2   |  2   |  3   |  3   |  4   |
+|  **최대 이익**(tmp2)  |  4   |  4   |  4   |  4   |  4   |  3   |  3   |  0   |
+
+따라서 결과값은 tmp1[i] + tmp2[i]의 최대값으로 계산합니다.
+
+
+
+### **코드** 
+
+사용 언어는 `python3`입니다.
+
+```python
+# python
+# [LeetCode] week-3-august-16th
+# @Jihyun22
+
+# input -> 괄호 제거, ','기준으로 int값 분할하여 stock이름의 list 생성
+stock = list(map(int, input().strip('[]').split(',')))
+
+def maxProfit(stock):
+    day = len(stock)
+    # 입력값이 2개 미만이면 0 return
+    if day < 2: return 0
+    # 양 끝값에서 중앙으로 탐색
+    left, right = stock[0], stock[day-1]
+    # 최대 트렌젝션은 2번 일어나므로 각각 이익 저장할 배열 선언
+    tmp1, tmp2 = [0]*day, [0]*day
+    
+    for i in range(1, day):
+        # 왼쪽 -> 오른쪽 순으로 S_min 연산
+        tmp1[i] = max(tmp1[i-1], stock[i]-left)
+        left = min(left, stock[i])
+        # 오른쪽 -> 왼쪽 순으로 S_max 연산
+        j = day-1-i
+        tmp2[j] = max(tmp2[j+1], right-stock[j])
+        right = max(right, stock[j])
+        # 이익은 음수가 될 수 없으므로 초기값은 0
+        result = 0
+        
+    # 각각의 tmp에서 i번째 수의 합은 이익의 경우의 수
+    for i in range(day):
+        # 이익의 최대값 연산
+        result = max(result, tmp1[i]+tmp2[i])
+    return result
+
+print(maxProfit(stock))
+```
+
+
+
+
+
+## **📝 Submit**
+
+LeetCode 제출 코드입니다.
+
+```python
+class Solution:
+    def maxProfit(self, stock: List[int]) -> int:
+        day = len(stock)
+        tmp1 = [0 for i in range(day)]
+        tmp2 = [0 for i in range(day)]
+        cache = [[0 for i in range(day)] for i in range(day)]
+
+        for i in range(0, day):
+            for j in range(i, day):
+                cache[i][j] = stock[j]-stock[i]
+
+        for i in range(day-1, -1, -1):
+            tmp1[i] = max(cache[i][0:i+2])
+            tmp2[i] = max(cache[0:i+2][i])
+
+        tmp1.sort(reverse=True)
+        return max(sum(tmp1[0:2]), max(tmp2))
+```
+
+*LeetCode는 사용 언어 별 default 형식으로 작성해야 평가가 진행됩니다.* 
+
+---
+
+
+
+**관련 카테고리 포스트 더보기**
+
+> [Algorithm 관련 포스트 더보기](https://jihyun22.github.io/categories/Algorithm/)
+>
+> [Leetcode 관련 포스트 더보기](https://jihyun22.github.io/categories/Algorithm/leetcode/)
+
